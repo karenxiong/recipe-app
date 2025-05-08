@@ -15,11 +15,11 @@ function SearchForm({
   setSearchInput,
   cuisine,
   setCuisine,
-  fetchRecipes,
+  fetchPageOneRecipes,
 }) {
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetchRecipes();
+    fetchPageOneRecipes();
   };
 
   return (
