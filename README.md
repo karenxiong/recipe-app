@@ -1,6 +1,6 @@
 # 🥘 Recipe App
 
-[Link to Live App](https://recipe-6m9rzxvny-karens-projects-31c96e48.vercel.app/)
+[Link to Live App](https://recipe-app-beige-three.vercel.app/)
 
 A responsive recipe search application built with **Next.js 14**, **Tailwind CSS (v4)**, and the **Spoonacular API**. Users can search for recipes, filter by cuisine, and view detailed information including ingredients, instructions, and health-related tags.
 

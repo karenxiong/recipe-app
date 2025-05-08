@@ -61,7 +61,7 @@ function SearchForm({
             type="text"
             id="recipe-search"
             name="search"
-            placeholder="Search for recipe..."
+            placeholder="Search..."
             value={searchInput}
             onChange={(e) => {
               setSearchInput(e.target.value);
