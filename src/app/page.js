@@ -25,9 +25,12 @@ export default function Home() {
 
   useEffect(() => {
     handleSearch();
-  }, [cuisine, page]);
+  }, [page]);
 
-  const handleSearch = async ({ goToFirstPage = false } = {}) => {
+  const handleSearch = async ({
+    goToFirstPage = false,
+    newCuisine = cuisine,
+  } = {}) => {
     let pageToSearch = page;
     if (goToFirstPage && page !== 1) {
       setPage(1);
@@ -42,7 +45,7 @@ export default function Home() {
     try {
       const data = await searchRecipes(
         searchInput,
-        cuisine,
+        newCuisine,
         offset,
         RECIPES_PER_PAGE
       );
@@ -55,6 +58,10 @@ export default function Home() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const fetchPageOneRecipes = (newCuisine) => {
+    handleSearch({ goToFirstPage: true, newCuisine });
   };
 
   return (
@@ -70,10 +77,11 @@ export default function Home() {
             searchInput={searchInput}
             setSearchInput={setSearchInput}
             cuisine={cuisine}
-            setCuisine={setCuisine}
-            fetchRecipes={() => {
-              handleSearch({ goToFirstPage: true });
+            setCuisine={(cuisine) => {
+              setCuisine(cuisine);
+              fetchPageOneRecipes(cuisine);
             }}
+            fetchPageOneRecipes={fetchPageOneRecipes}
           />
         </div>
         <div className="relative w-full px-6 py-16 md:px-12 md:py-24 hidden md:block ml-8">
