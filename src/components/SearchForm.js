@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { CUISINES } from "@/utils/cuisines";
+import React from "react";
+import { ALL_CUISINES, CUISINES } from "@/utils/cuisines";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -8,12 +8,16 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 
-function SearchInput({ onSearch, selectedCuisine, setSelectedCuisine }) {
-  const [input, setInput] = useState("");
-
+function SearchForm({
+  searchInput,
+  setSearchInput,
+  cuisine,
+  setCuisine,
+  fetchRecipes,
+}) {
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSearch(input);
+    fetchRecipes();
   };
 
   return (
@@ -21,7 +25,7 @@ function SearchInput({ onSearch, selectedCuisine, setSelectedCuisine }) {
       <div className="flex w-full">
         <DropdownMenu>
           <DropdownMenuTrigger className="text-nowrap flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border-l-1 border-t-1 border-b-1 border-r-0.5 border-gray-300 rounded-l-lg hover:bg-gray-50">
-            {selectedCuisine || "All Cuisines"}
+            {cuisine || ALL_CUISINES}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -41,17 +45,17 @@ function SearchInput({ onSearch, selectedCuisine, setSelectedCuisine }) {
             align="start"
             className="max-h-60 overflow-auto bg-white"
           >
-            {CUISINES.map((cuisine) => (
+            {CUISINES.map((currentCuisine) => (
               <DropdownMenuItem
-                key={cuisine}
-                className={selectedCuisine === cuisine ? "text-coral" : ""}
-                onClick={() =>
-                  setSelectedCuisine(
-                    cuisine === "All Cuisines" ? null : cuisine
-                  )
-                }
+                key={currentCuisine}
+                className={currentCuisine === cuisine ? "text-coral" : ""}
+                onClick={() => {
+                  setCuisine(
+                    currentCuisine === ALL_CUISINES ? "" : currentCuisine
+                  );
+                }}
               >
-                {cuisine}
+                {currentCuisine}
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>
@@ -80,8 +84,10 @@ function SearchInput({ onSearch, selectedCuisine, setSelectedCuisine }) {
             id="recipe-search"
             name="search"
             placeholder="Search for a recipe..."
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
+            value={searchInput}
+            onChange={(e) => {
+              setSearchInput(e.target.value);
+            }}
           />
         </div>
       </div>
@@ -91,4 +97,4 @@ function SearchInput({ onSearch, selectedCuisine, setSelectedCuisine }) {
     </form>
   );
 }
-export default SearchInput;
+export default SearchForm;
