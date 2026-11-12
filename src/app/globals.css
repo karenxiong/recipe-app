@@ -2,9 +2,13 @@
 @tailwind utilities;
 @import "tailwindcss";
 
+/* Light mode only: dark: styles apply only under a .dark class, not the OS setting */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #000000;
+  color-scheme: light;
 }
 
 @theme inline {
@@ -14,13 +18,6 @@
   --font-mono: var(--font-geist-mono);
   --color-coral: #DC392A;
   --color-darkcoral: #BE392C;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {

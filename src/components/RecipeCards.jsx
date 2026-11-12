@@ -11,7 +11,7 @@ function RecipeCards({ recipe }) {
       href={`/recipe/${recipe.id}`}
       className="flex flex-col items-center justify-center p-4 w-full"
     >
-      <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl dark:bg-gray-950 h-full w-full flex flex-col">
+      <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl h-full w-full flex flex-col">
         <Image
           src={recipe.image}
           alt={`Image of ${recipe.title}`}
